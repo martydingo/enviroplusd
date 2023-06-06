@@ -1,4 +1,4 @@
-from bme280 import bme280
+from bme280 import BME280
 from ltr559 import LTR559
 from pms5003 import PMS5003
 
@@ -17,7 +17,7 @@ class sensors:
 
     class BME280:
         def __init__(self) -> None:
-            self.BME280 = bme280()
+            self.BME280 = BME280()
 
         def poll(self) -> dict[str, float]:
             temperature: float = (
