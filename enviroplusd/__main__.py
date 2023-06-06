@@ -158,8 +158,8 @@ if config["climate"]["sensors"]["pms5003"] == True:
 
 for key, value in haClimateDiscoveryTopics.items():
     print(f'{value["config_topic"]}, {value["payload"]}')
-    mqtt().publish(value["config_topic"], value["payload"])
+    publish(value["config_topic"], value["payload"])
 
 # for key, value in climate.items():
-#     mqtt().publish(key, value)
+#     publish(key, value)
 
