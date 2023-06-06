@@ -16,10 +16,7 @@ def _on_connect_(client, userdata, flags, rc):
         connection_error = errors.get(rc, "unknown error")
         print("Connection error with result code " + connection_error)
     else:
-        print("Connected to MQTT broker")
-
-def publish(self, topic, value):
-    self.client.publish(topic, str(value))
+        print("Connected to MQTT broker")    
 
 
 config: dict[str, str] = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
@@ -157,8 +154,7 @@ if config["climate"]["sensors"]["pms5003"] == True:
     climate["pm/Ten"] = pms5003_data["pmTen"]
 
 for key, value in haClimateDiscoveryTopics.items():
-    print(f'{value["config_topic"]}, {value["payload"]}')
-    publish(value["config_topic"], value["payload"])
+    mqttClient.publish(value["config_topic"], str(value["payload"]))
 
 # for key, value in climate.items():
 #     publish(key, value)
