@@ -154,7 +154,7 @@ if config["climate"]["sensors"]["pms5003"] == True:
     climate["pm/Ten"] = pms5003_data["pmTen"]
 
 for key, value in haClimateDiscoveryTopics.items():
-    mqttClient.publish(value["config_topic"], str(value["payload"]))
+    mqttClient.publish(value["config_topic"], str(value["payload"]).replace("'", '"'))
 
 # for key, value in climate.items():
 #     publish(key, value)
