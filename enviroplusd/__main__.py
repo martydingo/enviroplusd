@@ -12,86 +12,99 @@ homeassistant_mqtt_autodiscover_prefix = config["homeassistant"]["autodiscover_p
 node_id = config["mqtt"]["node_id"]
 
 homeassistant_mqtt_topic_prefix = (
-    f"{homeassistant_mqtt_autodiscover_prefix}/sensor/{node_id}/"
+    f"{homeassistant_mqtt_autodiscover_prefix}/sensor/climate-{node_id}"
 )
+
+enviroplusd_mqtt_topic_prefix = f"climate/{node_id}"
 
 haClimateDiscoveryTopics = {
     "temperature": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/temperature/config",
         "payload": {
             "name": "temperature",
             "object_id": "temperature",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/temperature/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/temperature/state",
+        },
     },
     "pressure": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pressure/config",
         "payload": {
             "name": "pressure",
             "object_id": "pressure",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/pressure/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pressure/state",
+        },
     },
     "humidity": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/humidity/config",
         "payload": {
             "name": "humidity",
             "object_id": "humidity",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/humidity/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/humidity/state",
+        },
     },
     "lux": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/lux/config",
         "payload": {
             "name": "lux",
             "object_id": "lux",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/lux/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/lux/state",
+        },
     },
     "proximity": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/proximity/config",
         "payload": {
             "name": "proximity",
             "object_id": "proximity",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/proximity/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/proximity/state",
+        },
     },
     "gas/reducing": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/reducing/config",
         "payload": {
             "name": "reducing",
             "object_id": "reducing",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/reducing/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/state",
+        },
     },
     "gas/oxidising": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/oxidising/config",
         "payload": {
             "name": "oxidising",
             "object_id": "oxidising",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/oxidising/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising/state",
+        },
     },
     "gas/nh3": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/nh3/config",
         "payload": {
             "name": "nh3",
             "object_id": "nh3",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/nh3/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3/state",
+        },
     },
     "pm/One": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/One/config",
         "payload": {
             "name": "One",
             "object_id": "One",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/One/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/One/state",
+        },
     },
     "pm/TwoDotFive": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/TwoDotFive/config",
         "payload": {
             "name": "TwoDotFive",
             "object_id": "TwoDotFive",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/TwoDotFive/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/TwoDotFive/state",
+        },
     },
     "pm/Ten": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/Ten/config",
         "payload": {
             "name": "Ten",
             "object_id": "Ten",
-            "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/Ten/config",
-        }
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/Ten/state",
+        },
     },
 }
 
