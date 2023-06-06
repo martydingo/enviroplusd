@@ -1,6 +1,6 @@
 *.pyc
 */__pycache__
-test.py
+*test.py
 .vscode
 config.yaml
 .python-version

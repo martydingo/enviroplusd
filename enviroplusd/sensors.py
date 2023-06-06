@@ -80,7 +80,7 @@ class sensors:
                 channels=self.CHANNELS,
                 rate=self.SAMPLE_RATE,
                 input=True,
-                input_device_index=2,
+                input_device_index=0,
                 frames_per_buffer=self.PERIOD_SIZE_IN_FRAME,
             )
             data = mic.read(self.PERIOD_SIZE_IN_FRAME)
