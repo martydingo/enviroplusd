@@ -19,6 +19,12 @@ class mqtt:
             print("Connected to MQTT broker")
 
     def __init__(self) -> None:
+        pass
+
+    def _loadMqttConfig_(self) -> dict[str, str]:
+        return yaml.load(open("config.yaml"), Loader=yaml.FullLoader)["mqtt"]
+
+    def publish(self, topic, value):
         mqttConfig: dict[str, str] = self._loadMqttConfig_()
         print(mqttConfig["host"])
         self.mqttClient = pahoMqtt.Client()
@@ -27,12 +33,7 @@ class mqtt:
         if mqttConfig["tls"]:
             self.mqttClient.tls_set()
         self.mqttClient.connect(mqttConfig["host"], mqttConfig["port"])
+        self.mqttClient.loop_start()
         time.sleep(5)
         print(self.mqttClient.is_connected())
-        self.mqttClient.loop_start()
-
-    def _loadMqttConfig_(self) -> dict[str, str]:
-        return yaml.load(open("config.yaml"), Loader=yaml.FullLoader)["mqtt"]
-
-    def publish(self, topic, value):
         self.client.publish(topic, str(value))
