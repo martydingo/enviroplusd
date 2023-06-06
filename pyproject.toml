@@ -16,6 +16,7 @@ ltr559 = "^0.1.1"
 pms5003 = "^0.0.5"
 paho-mqtt = "^1.6.1"
 numpy = "^1.24.3"
+pyaudio = "^0.2.13"
 
 
 [build-system]

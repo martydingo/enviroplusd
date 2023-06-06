@@ -6,6 +6,9 @@ from vcgencmd import Vcgencmd
 # import ST7735
 import time
 import enviroplus.gas
+import pyaudio
+import audioop
+import math
 
 
 class sensors:
@@ -57,8 +60,33 @@ class sensors:
             return {"pmOne": pmOne, "pmTwoDotFive": pmTwoDotFive, "pmTen": pmTen}
 
     class Microphone:
+        # Some constants for setting the PyAudio and the
+        # Aubio.
+        BUFFER_SIZE = 2048
+        CHANNELS = 1
+        FORMAT = pyaudio.paFloat32
+        METHOD = "default"
+        SAMPLE_RATE = 44100
+        HOP_SIZE = BUFFER_SIZE // 2
+        PERIOD_SIZE_IN_FRAME = HOP_SIZE
+
         def __init__(self) -> None:
             pass
+
+        def poll(self) -> dict[str, float]:
+            pA = pyaudio.PyAudio()
+            mic = pA.open(
+                format=self.FORMAT,
+                channels=self.CHANNELS,
+                rate=self.SAMPLE_RATE,
+                input=True,
+                frames_per_buffer=self.PERIOD_SIZE_IN_FRAME,
+            )
+            data = mic.read(self.PERIOD_SIZE_IN_FRAME)
+            rms = audioop.rms(data, 2)
+            decibel = 20 * math.log10(rms)
+            mic.close()
+            return {"decibel": decibel}
 
         def poll(self) -> None:
             pass
