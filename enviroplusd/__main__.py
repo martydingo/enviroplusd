@@ -17,9 +17,9 @@ climate = {
     "lux": ltr559_data["lux"],
     "proximity": ltr559_data["proximity"],
     "gas": {
-        "reducing": mics6814_data["reducing"],
-        "oxidising": mics6814_data["oxidising"],
-        "nh3": mics6814_data["nh3"],
+        "reducing": mics6814_data.reducing,
+        "oxidising": mics6814_data.oxidising,
+        "nh3": mics6814_data.nh3,
     },
 }
 
