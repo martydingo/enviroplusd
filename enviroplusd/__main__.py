@@ -59,7 +59,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "gas/reducing": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/reducing/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} Reducing Gas",
             "object_id": f"{node_id}_gas_reducing",
@@ -67,7 +67,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "gas/oxidising": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/oxidising/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/oxidising-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} Oxidising Gas",
             "object_id": f"{node_id}_gas_oxidising",
@@ -75,7 +75,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "gas/nh3": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/gas/nh3/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/nh3-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} NH3 Gas",
             "object_id": f"{node_id}_gas_nh3",
@@ -83,7 +83,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "pm/One": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/One/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm-one/config",
         "payload": {
             "name": f"{node_id.capitalize()} PM 1.0",
             "object_id": f"{node_id}_pm_one",
@@ -91,7 +91,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "pm/TwoDotFive": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/TwoDotFive/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm-twodotfive/config",
         "payload": {
             "name": f"{node_id.capitalize()} PM 2.5",
             "object_id": f"{node_id}_pm_two_dot_five",
@@ -99,7 +99,7 @@ haClimateDiscoveryTopics = {
         },
     },
     "pm/Ten": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm/Ten/config",
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/pm-ten/config",
         "payload": {
             "name": f"{node_id.capitalize()} PM 10",
             "object_id": f"{node_id}_pm_ten",
@@ -125,6 +125,10 @@ if config["climate"]["sensors"]["pms5003"] == True:
     climate["pm/One"] = pms5003_data["pmOne"]
     climate["pm/TwoDotFive"] = pms5003_data["pmTwoDotFive"]
     climate["pm/Ten"] = pms5003_data["pmTen"]
+
+for value in haClimateDiscoveryTopics():
+    print(f'{value["config_topic"]}, {value["payload"]}')
+    # mqtt().publish(value["config_topic"], value["payload"])
 
 # for key, value in climate.items():
 #     mqtt().publish(key, value)
