@@ -1,8 +1,8 @@
 from bme280 import BME280
 from ltr559 import LTR559
 from pms5003 import PMS5003
+from vcgencmd import Vcgencmd
 
-# from vcgencmd import Vcgencmd
 # import ST7735
 import time
 import enviroplus.gas
