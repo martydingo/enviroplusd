@@ -4,10 +4,12 @@ import yaml
 
 __all__ = ["sensors", "mqtt"]
 
-bme280_data = sensors.BME280().poll()
 
-climate = {
-    "temperature": bme280_data["temperature"],
-}
+def __main__():
+    bme280_data = sensors.BME280().poll()
 
-print(climate)
+    climate = {
+        "temperature": bme280_data["temperature"],
+    }
+
+    print(climate)
