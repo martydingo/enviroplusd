@@ -23,8 +23,8 @@ class sensors:
             self.BME280 = BME280()
 
         def poll(self) -> dict[str, float]:
-            temperature: float = (
-                round(self.BME280.get_temperature(), 2) - self.calibrate()
+            temperature: float = round(
+                self.BME280.get_temperature() - self.calibrate(), 2
             )
             pressure: float = round(self.BME280.get_pressure(), 2)
             humidity: float = round(self.BME280.get_humidity(), 2)
