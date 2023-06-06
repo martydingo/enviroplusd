@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "enviroplusd"
+version = "0.1.0"
+description = "An application that polls sensors on an Enviro+ and communicates with HA via MQTT"
+authors = ["Martin George <marty@dii.ngo>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+vcgencmd = "^0.1.1"
+bme280 = "^0.6"
+st7735 = "^0.0.4.post1"
+enviroplus = "^0.0.6"
+ltr559 = "^0.1.1"
+pms5003 = "^0.0.5"
+paho-mqtt = "^1.6.1"
+numpy = "^1.24.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
