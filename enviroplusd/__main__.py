@@ -1,8 +1,38 @@
 from .sensors import sensors
-from .mqtt import mqtt
-import yaml
+from paho.mqtt import client as pahoMqtt
+import yaml, time
+
+
+def _on_connect_(client, userdata, flags, rc):
+    errors = {
+        1: "incorrect MQTT protocol version",
+        2: "invalid MQTT client identifier",
+        3: "server unavailable",
+        4: "bad username or password",
+        5: "connection refused",
+    }
+
+    if rc > 0:
+        connection_error = errors.get(rc, "unknown error")
+        print("Connection error with result code " + connection_error)
+    else:
+        print("Connected to MQTT broker")
+
+def publish(self, topic, value):
+    self.client.publish(topic, str(value))
+
 
 config: dict[str, str] = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
+
+mqttClient = pahoMqtt.Client()
+mqttClient.on_connect = _on_connect_
+mqttClient.username_pw_set(config["mqtt"]["username"], config["mqtt"]["password"])
+
+if config["mqtt"]["tls"]:
+    mqttClient.tls_set()
+
+mqttClient.connect(config["mqtt"]["host"], config["mqtt"]["port"])
+mqttClient.loop_start()
 
 bme280_data = sensors.BME280().poll()
 ltr559_data = sensors.LTR559().poll()
@@ -133,6 +163,3 @@ for value in haClimateDiscoveryTopics():
 # for key, value in climate.items():
 #     mqtt().publish(key, value)
 
-print(haClimateDiscoveryTopics)
-
-print(climate)

@@ -19,21 +19,21 @@ class mqtt:
             print("Connected to MQTT broker")
 
     def __init__(self) -> None:
-        pass
+        config: dict[str, str] = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
 
-    def _loadMqttConfig_(self) -> dict[str, str]:
-        return yaml.load(open("config.yaml"), Loader=yaml.FullLoader)["mqtt"]
-
-    def publish(self, topic, value):
-        mqttConfig: dict[str, str] = self._loadMqttConfig_()
-        print(mqttConfig["host"])
         self.mqttClient = pahoMqtt.Client()
         self.mqttClient.on_connect = self._on_connect_
-        self.mqttClient.username_pw_set(mqttConfig["username"], mqttConfig["password"])
-        if mqttConfig["tls"]:
+        self.mqttClient.username_pw_set(config["mqtt"]["username"], config["mqtt"]["password"])
+        
+        if config["mqtt"]["tls"]:
             self.mqttClient.tls_set()
-        self.mqttClient.connect(mqttConfig["host"], mqttConfig["port"])
+
+        self.mqttClient.connect(config["mqtt"]["host"], config["mqtt"]["port"])
         self.mqttClient.loop_start()
+        
         time.sleep(5)
+        
         print(self.mqttClient.is_connected())
+
+    def publish(self, topic, value):
         self.client.publish(topic, str(value))
