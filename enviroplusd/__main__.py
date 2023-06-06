@@ -157,5 +157,5 @@ for key, value in haClimateDiscoveryTopics.items():
     mqttClient.publish(value["config_topic"], str(value["payload"]).replace("'", '"'))
 
 for key, value in climate.items():
-    mqttClient.publish(key, value)
+    mqttClient.publish(enviroplusd_mqtt_topic_prefix+"/"+key, value)
 
