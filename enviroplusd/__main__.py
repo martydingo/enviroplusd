@@ -8,6 +8,7 @@ climateConfig: dict[str, str] = yaml.load(open("config.yaml"), Loader=yaml.FullL
 
 bme280_data = sensors.BME280().poll()
 ltr559_data = sensors.LTR559().poll()
+mics6814_data = sensors.MICS6814().poll()
 
 climate = {
     "temperature": bme280_data["temperature"],
@@ -15,6 +16,11 @@ climate = {
     "humidity": bme280_data["humidity"],
     "lux": ltr559_data["lux"],
     "proximity": ltr559_data["proximity"],
+    "gas": {
+        "reducing": mics6814_data["reducing"],
+        "oxidising": mics6814_data["oxidising"],
+        "nh3": mics6814_data["nh3"],
+    },
 }
 
 
