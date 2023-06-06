@@ -35,6 +35,6 @@ class mqtt:
         return yaml.load(open("config.yaml"), Loader=yaml.FullLoader)["mqtt"]
 
     def publish(self, topic, value):
-        prefix = self._loadMqttConfig_()["topic_prefix"]
+        prefix = f"climate/{self._loadMqttConfig_()["topic_prefix"]}"
         topic = f"{prefix}/{topic}"
         self.client.publish(topic, str(value))
