@@ -1,7 +1,6 @@
 from .sensors import sensors
 from paho.mqtt import client as pahoMqtt
-import yaml, time
-
+import yaml, time, sys
 
 def _on_connect_(client, userdata, flags, rc):
     errors = {
