@@ -228,7 +228,7 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 10",
             "unique_id": f"{node_id}_pm_ten",
             "object_id": f"{node_id}_pm_ten",
-            "unit_of_measurement": "ug/m3
+            "unit_of_measurement": "ug/m3"
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/Ten",
             "device": {
                 "manufacturer": "Pimironi",
