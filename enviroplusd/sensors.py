@@ -31,7 +31,7 @@ class sensors:
                 "humidity": humidity,
             }
 
-        def calibrate(self, factor=0.033) -> float:
+        def calibrate(self, factor=0.124133) -> float:
             vcGenCMD = Vcgencmd()
             cpuTemp = vcGenCMD.measure_temp()
             return round(cpuTemp * factor, 2)
