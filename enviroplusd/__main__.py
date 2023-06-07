@@ -51,6 +51,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Temperature",
             "object_id": f"{node_id}_temperature",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/temperature",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "pressure": {
@@ -59,6 +67,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Pressure",
             "object_id": f"{node_id}_pressure",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pressure",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "humidity": {
@@ -67,6 +83,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Humidity",
             "object_id": f"{node_id}_humidity",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/humidity",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "lux": {
@@ -75,6 +99,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Lux",
             "object_id": f"{node_id}_lux",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/lux",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "proximity": {
@@ -83,12 +115,28 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Proximity",
             "object_id": f"{node_id}_proximity",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/proximity",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "gas/reducing": {
         "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} Reducing Gas",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            },
             "object_id": f"{node_id}_gas_reducing",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing",
         },
@@ -99,6 +147,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Oxidising Gas",
             "object_id": f"{node_id}_gas_oxidising",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "gas/nh3": {
@@ -107,6 +163,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} NH3 Gas",
             "object_id": f"{node_id}_gas_nh3",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "pm/One": {
@@ -115,6 +179,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 1.0",
             "object_id": f"{node_id}_pm_one",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/One",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "pm/TwoDotFive": {
@@ -123,6 +195,14 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 2.5",
             "object_id": f"{node_id}_pm_two_dot_five",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/TwoDotFive",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
         },
     },
     "pm/Ten": {
@@ -131,6 +211,15 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 10",
             "object_id": f"{node_id}_pm_ten",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/Ten",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": [
+                    "climate"
+                ]
+            }
+            
         },
     },
 }
