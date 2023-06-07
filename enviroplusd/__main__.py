@@ -48,7 +48,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Temperature",
             "unique_id": f"{node_id}_temperature",
-            #"object_id": f"{node_id}_temperature",
+            "unit_of_measurement": "°C",
+            "object_id": f"{node_id}_temperature",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/temperature",
             "device": {
                 "manufacturer": "Pimironi",
@@ -65,7 +66,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Pressure",
             "unique_id": f"{node_id}_pressure",
-            #"object_id": f"{node_id}_pressure",
+            "unit_of_measurement": "hPa",
+            "object_id": f"{node_id}_pressure",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pressure",
             "device": {
                 "manufacturer": "Pimironi",
@@ -82,8 +84,9 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Humidity",
             "unique_id": f"{node_id}_humidity",
-            #"object_id": f"{node_id}_humidity",
+            "object_id": f"{node_id}_humidity",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/humidity",
+            "unit_of_measurement": "%",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -99,7 +102,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Lux",
             "unique_id": f"{node_id}_lux",
-            #"object_id": f"{node_id}_lux",
+            "object_id": f"{node_id}_lux",
+            "unit_of_measurement": "lux",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/lux",
             "device": {
                 "manufacturer": "Pimironi",
@@ -116,7 +120,7 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Proximity",
             "unique_id": f"{node_id}_proximity",
-            #"object_id": f"{node_id}_proximity",
+            "object_id": f"{node_id}_proximity",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/proximity",
             "device": {
                 "manufacturer": "Pimironi",
@@ -132,6 +136,7 @@ haClimateDiscoveryTopics = {
         "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} Reducing Gas",
+            "unit_of_measurement": "kO",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -141,7 +146,7 @@ haClimateDiscoveryTopics = {
                 ]
             },
             "unique_id": f"{node_id}_gas_reducing",
-            #"object_id": f"{node_id}_gas_reducing",
+            "object_id": f"{node_id}_gas_reducing",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing",
         },
     },
@@ -150,7 +155,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} Oxidising Gas",
             "unique_id": f"{node_id}_gas_oxidising",
-            #"object_id": f"{node_id}_gas_oxidising",
+            "object_id": f"{node_id}_gas_oxidising",
+            "unit_of_measurement": "kO",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising",
             "device": {
                 "manufacturer": "Pimironi",
@@ -167,7 +173,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} NH3 Gas",
             "unique_id": f"{node_id}_gas_nh3",
-            #"object_id": f"{node_id}_gas_nh3",
+            "unit_of_measurement": "kO",
+            "object_id": f"{node_id}_gas_nh3",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3",
             "device": {
                 "manufacturer": "Pimironi",
@@ -184,7 +191,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} PM 1.0",
             "unique_id": f"{node_id}_pm_one",
-            #"object_id": f"{node_id}_pm_one",
+            "object_id": f"{node_id}_pm_one",
+            "unit_of_measurement": "ug/m3
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/One",
             "device": {
                 "manufacturer": "Pimironi",
@@ -201,7 +209,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} PM 2.5",
             "unique_id": f"{node_id}_pm_two_dot_five",
-            #"object_id": f"{node_id}_pm_two_dot_five",
+            "object_id": f"{node_id}_pm_two_dot_five",
+            "unit_of_measurement": "ug/m3
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/TwoDotFive",
             "device": {
                 "manufacturer": "Pimironi",
@@ -218,7 +227,8 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} PM 10",
             "unique_id": f"{node_id}_pm_ten",
-            #"object_id": f"{node_id}_pm_ten",
+            "object_id": f"{node_id}_pm_ten",
+            "unit_of_measurement": "ug/m3
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/Ten",
             "device": {
                 "manufacturer": "Pimironi",
