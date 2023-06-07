@@ -192,7 +192,7 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 1.0",
             "unique_id": f"{node_id}_pm_one",
             "object_id": f"{node_id}_pm_one",
-            "unit_of_measurement": "ug/m3"
+            "unit_of_measurement": "ug/m3",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/One",
             "device": {
                 "manufacturer": "Pimironi",
@@ -210,7 +210,7 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} PM 2.5",
             "unique_id": f"{node_id}_pm_two_dot_five",
             "object_id": f"{node_id}_pm_two_dot_five",
-            "unit_of_measurement": "ug/m3"
+            "unit_of_measurement": "ug/m3",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/TwoDotFive",
             "device": {
                 "manufacturer": "Pimironi",
