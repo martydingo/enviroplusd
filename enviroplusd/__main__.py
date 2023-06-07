@@ -31,9 +31,7 @@ if config["mqtt"]["tls"]:
 mqttClient.connect(config["mqtt"]["host"], config["mqtt"]["port"])
 mqttClient.loop_start()
 
-bme280_data = sensors.BME280().poll()
-ltr559_data = sensors.LTR559().poll()
-mics6814_data = sensors.MICS6814().poll()
+
 
 homeassistant_mqtt_autodiscover_prefix = config["homeassistant"]["autodiscover_prefix"]
 node_id = config["mqtt"]["node_id"]
@@ -44,7 +42,7 @@ homeassistant_mqtt_topic_prefix = (
 
 enviroplusd_mqtt_topic_prefix = f"climate/{node_id}"
 
-haClimateDiscoveryTopics = {
+aClimateDiscoveryTopics = {
     "temperature": {
         "config_topic": f"{homeassistant_mqtt_topic_prefix}/temperature/config",
         "payload": {
@@ -234,28 +232,41 @@ haClimateDiscoveryTopics = {
         },
     },
 }
+        
 
-climate = {
-    "temperature": bme280_data["temperature"],
-    "pressure": bme280_data["pressure"],
-    "humidity": bme280_data["humidity"],
-    "lux": ltr559_data["lux"],
-    "proximity": ltr559_data["proximity"],
-    "gas/reducing": mics6814_data.reducing,
-    "gas/oxidising": mics6814_data.oxidising,
-    "gas/nh3": mics6814_data.nh3,
-}
+try:
+    while True:
 
 
-if config["climate"]["sensors"]["pms5003"] == True:
-    pms5003_data = sensors.PMS5003().poll()
-    climate["pm/One"] = pms5003_data["pmOne"]
-    climate["pm/TwoDotFive"] = pms5003_data["pmTwoDotFive"]
-    climate["pm/Ten"] = pms5003_data["pmTen"]
+        bme280_data = sensors.BME280().poll()
+        ltr559_data = sensors.LTR559().poll()
+        mics6814_data = sensors.MICS6814().poll()
+ 
+        climate = {
+            "temperature": bme280_data["temperature"],
+            "pressure": bme280_data["pressure"],
+            "humidity": bme280_data["humidity"],
+            "lux": ltr559_data["lux"],
+            "proximity": ltr559_data["proximity"],
+            "gas/reducing": mics6814_data.reducing,
+            "gas/oxidising": mics6814_data.oxidising,
+            "gas/nh3": mics6814_data.nh3,
+        }
 
-for key, value in haClimateDiscoveryTopics.items():
-    mqttClient.publish(value["config_topic"], str(value["payload"]).replace("'", '"'), retain=True)
 
-for key, value in climate.items():
-    mqttClient.publish(enviroplusd_mqtt_topic_prefix+"/"+key, value)
+        if config["climate"]["sensors"]["pms5003"] == True:
+            pms5003_data = sensors.PMS5003().poll()
+            climate["pm/One"] = pms5003_data["pmOne"]
+            climate["pm/TwoDotFive"] = pms5003_data["pmTwoDotFive"]
+            climate["pm/Ten"] = pms5003_data["pmTen"]
 
+        for key, value in haClimateDiscoveryTopics.items():
+            mqttClient.publish(value["config_topic"], str(value["payload"]).replace("'", '"'), retain=True)
+
+        for key, value in climate.items():
+            mqttClient.publish(enviroplusd_mqtt_topic_prefix+"/"+key, value)
+
+        time.sleep(10)
+except KeyboardInterrupt:
+    mqttClient.disconnect()
+    sys.exit(0)
