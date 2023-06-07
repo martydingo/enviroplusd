@@ -42,7 +42,7 @@ homeassistant_mqtt_topic_prefix = (
 
 enviroplusd_mqtt_topic_prefix = f"climate/{node_id}"
 
-aClimateDiscoveryTopics = {
+haClimateDiscoveryTopics = {
     "temperature": {
         "config_topic": f"{homeassistant_mqtt_topic_prefix}/temperature/config",
         "payload": {
