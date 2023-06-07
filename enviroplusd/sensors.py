@@ -5,10 +5,7 @@ from pms5003 import PMS5003
 from vcgencmd import Vcgencmd
 
 # import ST7735
-import time
-import pyaudio
-import audioop
-import math
+import pyaudio, audioop, math, smbus
 
 
 class sensors:
@@ -34,7 +31,7 @@ class sensors:
                 "humidity": humidity,
             }
 
-        def calibrate(self, factor=0.10) -> float:
+        def calibrate(self, factor=0.01) -> float:
             vcGenCMD = Vcgencmd()
             cpuTemp = vcGenCMD.measure_temp()
             return round(cpuTemp * factor, 2)

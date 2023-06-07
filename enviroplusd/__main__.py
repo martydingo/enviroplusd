@@ -2,6 +2,7 @@ from .sensors import sensors
 from paho.mqtt import client as pahoMqtt
 import yaml, time, sys
 
+
 def _on_connect_(client, userdata, flags, rc):
     errors = {
         1: "incorrect MQTT protocol version",
@@ -15,7 +16,7 @@ def _on_connect_(client, userdata, flags, rc):
         connection_error = errors.get(rc, "unknown error")
         print("Connection error with result code " + connection_error)
     else:
-        print("Connected to MQTT broker")    
+        print("Connected to MQTT broker")
 
 
 config: dict[str, str] = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
@@ -29,7 +30,6 @@ if config["mqtt"]["tls"]:
 
 mqttClient.connect(config["mqtt"]["host"], config["mqtt"]["port"])
 mqttClient.loop_start()
-
 
 
 homeassistant_mqtt_autodiscover_prefix = config["homeassistant"]["autodiscover_prefix"]
@@ -54,10 +54,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "pressure": {
@@ -72,10 +70,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "humidity": {
@@ -90,10 +86,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "lux": {
@@ -108,10 +102,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "proximity": {
@@ -125,10 +117,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "gas/reducing": {
@@ -140,9 +130,7 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
+                "identifiers": ["climate"],
             },
             "unique_id": f"{node_id}_gas_reducing",
             "object_id": f"{node_id}_gas_reducing",
@@ -161,10 +149,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "gas/nh3": {
@@ -179,10 +165,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "pm/One": {
@@ -197,10 +181,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "pm/TwoDotFive": {
@@ -215,10 +197,8 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
+                "identifiers": ["climate"],
+            },
         },
     },
     "pm/Ten": {
@@ -233,24 +213,27 @@ haClimateDiscoveryTopics = {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
                 "name": "Office Climate Sensor",
-                "identifiers": [
-                    "climate"
-                ]
-            }
-            
+                "identifiers": ["climate"],
+            },
         },
     },
 }
-        
+
+print("Initialising sensors...")
+
+bme280 = sensors.BME280()
+ltr559 = sensors.LTR559()
+mics6814 = sensors.MICS6814()
+
+time.sleep(2)
+
 
 try:
     while True:
+        bme280_data = bme280.poll()
+        ltr559_data = ltr559.poll()
+        mics6814_data = mics6814.poll()
 
-
-        bme280_data = sensors.BME280().poll()
-        ltr559_data = sensors.LTR559().poll()
-        mics6814_data = sensors.MICS6814().poll()
- 
         climate = {
             "temperature": bme280_data["temperature"],
             "pressure": bme280_data["pressure"],
@@ -262,7 +245,6 @@ try:
             "gas/nh3": mics6814_data.nh3,
         }
 
-
         if config["climate"]["sensors"]["pms5003"] == True:
             pms5003_data = sensors.PMS5003().poll()
             climate["pm/One"] = pms5003_data["pmOne"]
@@ -270,10 +252,14 @@ try:
             climate["pm/Ten"] = pms5003_data["pmTen"]
 
         for key, value in haClimateDiscoveryTopics.items():
-            mqttClient.publish(value["config_topic"], str(value["payload"]).replace("'", '"'), retain=True)
+            mqttClient.publish(
+                value["config_topic"],
+                str(value["payload"]).replace("'", '"'),
+                retain=True,
+            )
 
         for key, value in climate.items():
-            mqttClient.publish(enviroplusd_mqtt_topic_prefix+"/"+key, value)
+            mqttClient.publish(enviroplusd_mqtt_topic_prefix + "/" + key, value)
 
         time.sleep(10)
 except KeyboardInterrupt:
