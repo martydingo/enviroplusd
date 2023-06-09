@@ -134,7 +134,7 @@ haClimateDiscoveryTopics = {
             },
             "unique_id": f"{node_id}_gas_reducing_resistance",
             "object_id": f"{node_id}_gas_reducing_resistance",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing_resistance",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/resistance",
         },
     },
     "gas/oxidising/resistance": {
@@ -144,7 +144,7 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_gas_oxidising_resistance",
             "object_id": f"{node_id}_gas_oxidising_resistance",
             "unit_of_measurement": "kO",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising_resistance",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising/resistance",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -160,7 +160,7 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_gas_nh3_resistance",
             "unit_of_measurement": "kO",
             "object_id": f"{node_id}_gas_nh3_resistance",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3_resistance",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3/resistance",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
