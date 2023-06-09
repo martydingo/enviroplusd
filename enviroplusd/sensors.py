@@ -63,7 +63,7 @@ class sensors:
             )
             ox_in_ppm = math.pow(10, math.log10(gas_data.oxidising / ox_r0) - 0.8129)
             nh3_in_ppm = math.pow(10, -1.8 * math.log10(gas_data.nh3 / nh3_r0) - 0.163)
-            return red_in_ppm, ox_in_ppm, nh3_in_ppm
+            return round(red_in_ppm, 2), round(ox_in_ppm, 2), round(nh3_in_ppm, 2)
 
     class PMS5003:
         def __init__(self) -> None:
