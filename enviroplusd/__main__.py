@@ -121,11 +121,59 @@ haClimateDiscoveryTopics = {
             },
         },
     },
+    "gas/reducing/resistance": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas-resistance/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} Reducing Gas Resistance",
+            "unit_of_measurement": "kO",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+            "unique_id": f"{node_id}_gas_reducing_resistance",
+            "object_id": f"{node_id}_gas_reducing_resistance",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing_resistance",
+        },
+    },
+    "gas/oxidising/resistance": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/oxidising-gas-resistance/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} Oxidising Gas Resistance",
+            "unique_id": f"{node_id}_gas_oxidising_resistance",
+            "object_id": f"{node_id}_gas_oxidising_resistance",
+            "unit_of_measurement": "kO",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising_resistance",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+        },
+    },
+    "gas/nh3/resistance": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/nh3-gas-resistance/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} NH3 Gas Resistance",
+            "unique_id": f"{node_id}_gas_nh3_resistance",
+            "unit_of_measurement": "kO",
+            "object_id": f"{node_id}_gas_nh3_resistance",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3_resistance",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+        },
+    },
     "gas/reducing": {
         "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas/config",
         "payload": {
             "name": f"{node_id.capitalize()} Reducing Gas",
-            "unit_of_measurement": "kO",
+            "unit_of_measurement": "ppm",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -143,7 +191,7 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Oxidising Gas",
             "unique_id": f"{node_id}_gas_oxidising",
             "object_id": f"{node_id}_gas_oxidising",
-            "unit_of_measurement": "kO",
+            "unit_of_measurement": "ppm",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising",
             "device": {
                 "manufacturer": "Pimironi",
@@ -158,7 +206,7 @@ haClimateDiscoveryTopics = {
         "payload": {
             "name": f"{node_id.capitalize()} NH3 Gas",
             "unique_id": f"{node_id}_gas_nh3",
-            "unit_of_measurement": "kO",
+            "unit_of_measurement": "ppm",
             "object_id": f"{node_id}_gas_nh3",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3",
             "device": {
@@ -233,6 +281,7 @@ try:
         bme280_data = bme280.poll()
         ltr559_data = ltr559.poll()
         mics6814_data = mics6814.poll()
+        mics6814_data_ppm = mics6814.poll_ppm()
 
         climate = {
             "temperature": bme280_data["temperature"],
@@ -240,9 +289,12 @@ try:
             "humidity": bme280_data["humidity"],
             "lux": ltr559_data["lux"],
             "proximity": ltr559_data["proximity"],
-            "gas/reducing": mics6814_data.reducing,
-            "gas/oxidising": mics6814_data.oxidising,
-            "gas/nh3": mics6814_data.nh3,
+            "gas/reducing/resistance": mics6814_data.reducing,
+            "gas/oxidising/resistance": mics6814_data.oxidising,
+            "gas/nh3/resistance": mics6814_data.nh3,
+            "gas/reducing": mics6814_data_ppm[0],
+            "gas/oxidising": mics6814_data_ppm[1],
+            "gas/nh3": mics6814_data_ppm[2],
         }
 
         if config["climate"]["sensors"]["pms5003"] == True:

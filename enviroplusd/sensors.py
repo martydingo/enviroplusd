@@ -52,6 +52,19 @@ class sensors:
         def poll(self) -> dict[str, float]:
             return gas.read_all()
 
+        def poll_ppm(self) -> dict[str, float]:
+            red_r0 = 380879
+            ox_r0 = 62918
+            nh3_r0 = 139995
+
+            gas_data = gas.read_all()
+            red_in_ppm = math.pow(
+                10, -1.25 * math.log10(gas_data.reducing / red_r0) + 0.64
+            )
+            ox_in_ppm = math.pow(10, math.log10(gas_data.oxidising / ox_r0) - 0.8129)
+            nh3_in_ppm = math.pow(10, -1.8 * math.log10(gas_data.nh3 / nh3_r0) - 0.163)
+            return red_in_ppm, ox_in_ppm, nh3_in_ppm
+
     class PMS5003:
         def __init__(self) -> None:
             self.PMS5003 = PMS5003()
