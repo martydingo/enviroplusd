@@ -169,10 +169,10 @@ haClimateDiscoveryTopics = {
             },
         },
     },
-    "gas/reducing": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas/config",
+    "gas/reducing/ppm": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas-ppm/config",
         "payload": {
-            "name": f"{node_id.capitalize()} Reducing Gas",
+            "name": f"{node_id.capitalize()} Reducing Gas PPM",
             "unit_of_measurement": "ppm",
             "device": {
                 "manufacturer": "Pimironi",
@@ -180,19 +180,19 @@ haClimateDiscoveryTopics = {
                 "name": "Office Climate Sensor",
                 "identifiers": ["climate"],
             },
-            "unique_id": f"{node_id}_gas_reducing",
-            "object_id": f"{node_id}_gas_reducing",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing",
+            "unique_id": f"{node_id}_gas_reducing_ppm",
+            "object_id": f"{node_id}_gas_reducing_ppm",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/ppm",
         },
     },
-    "gas/oxidising": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/oxidising-gas/config",
+    "gas/oxidising/ppm": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/oxidising-gas-ppm/config",
         "payload": {
-            "name": f"{node_id.capitalize()} Oxidising Gas",
-            "unique_id": f"{node_id}_gas_oxidising",
-            "object_id": f"{node_id}_gas_oxidising",
+            "name": f"{node_id.capitalize()} Oxidising Gas PPM",
+            "unique_id": f"{node_id}_gas_oxidising_ppm",
+            "object_id": f"{node_id}_gas_oxidising_ppm",
             "unit_of_measurement": "ppm",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising/ppm",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -201,14 +201,14 @@ haClimateDiscoveryTopics = {
             },
         },
     },
-    "gas/nh3": {
-        "config_topic": f"{homeassistant_mqtt_topic_prefix}/nh3-gas/config",
+    "gas/nh3/ppm": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/nh3-gas-ppm/config",
         "payload": {
-            "name": f"{node_id.capitalize()} NH3 Gas",
-            "unique_id": f"{node_id}_gas_nh3",
+            "name": f"{node_id.capitalize()} NH3 Gas PPM",
+            "unique_id": f"{node_id}_gas_nh3_ppm",
             "unit_of_measurement": "ppm",
-            "object_id": f"{node_id}_gas_nh3",
-            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3",
+            "object_id": f"{node_id}_gas_nh3_ppm",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3/ppm",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -292,9 +292,9 @@ try:
             "gas/reducing/resistance": mics6814_data.reducing,
             "gas/oxidising/resistance": mics6814_data.oxidising,
             "gas/nh3/resistance": mics6814_data.nh3,
-            "gas/reducing": mics6814_data_ppm[0],
-            "gas/oxidising": mics6814_data_ppm[1],
-            "gas/nh3": mics6814_data_ppm[2],
+            "gas/reducing/ppm": mics6814_data_ppm[0],
+            "gas/oxidising/ppm": mics6814_data_ppm[1],
+            "gas/nh3/ppm": mics6814_data_ppm[2],
         }
 
         if config["climate"]["sensors"]["pms5003"] == True:
