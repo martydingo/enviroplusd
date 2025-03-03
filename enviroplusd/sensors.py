@@ -65,6 +65,27 @@ class sensors:
             nh3_in_ppm = math.pow(10, -1.8 * math.log10(gas_data.nh3 / nh3_r0) - 0.163)
             return round(red_in_ppm, 2), round(ox_in_ppm, 2), round(nh3_in_ppm, 2)
 
+        def poll_ugm3(self) -> dict[str, float]:
+            uniGasConst =  0.0821
+            
+            molar_nh3 = 17.031
+            molar_no2 = 46.0055
+            molar_co = 28.0101
+            
+            bme280 = sensors.BME280()
+            bme280_data = bme280.poll()
+            
+            temp_kelvin = bme280_data["temperature"] + 273.15
+            pressure_atm = bme280_data["pressure"] / 1013.25
+            sensor_ppm = self.poll_ppm()
+            
+            nh3_ug_m3 = sensor_ppm[2]*((molar_nh3 * pressure_atm * 1000)/(uniGasConst*temp_kelvin))
+            no2_ug_m3 = sensor_ppm[1]*((molar_no2 * pressure_atm * 1000)/(uniGasConst*temp_kelvin))
+            co_ug_m3 = sensor_ppm[0]*((molar_co * pressure_atm * 1000)/(uniGasConst*temp_kelvin))
+            
+            return round(co_ug_m3, 2), round(no2_ug_m3, 2), round(nh3_ug_m3, 2) 
+            
+
     class PMS5003:
         def __init__(self) -> None:
             self.PMS5003 = PMS5003()

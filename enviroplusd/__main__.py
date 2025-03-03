@@ -49,6 +49,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_temperature",
             "unit_of_measurement": "°C",
             "object_id": f"{node_id}_temperature",
+            "device_class": "TEMPERATURE",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/temperature",
             "device": {
                 "manufacturer": "Pimironi",
@@ -65,6 +67,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_pressure",
             "unit_of_measurement": "hPa",
             "object_id": f"{node_id}_pressure",
+            "device_class": "ATMOSPHERIC_PRESSURE",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pressure",
             "device": {
                 "manufacturer": "Pimironi",
@@ -80,6 +84,8 @@ haClimateDiscoveryTopics = {
             "name": f"{node_id.capitalize()} Humidity",
             "unique_id": f"{node_id}_humidity",
             "object_id": f"{node_id}_humidity",
+            "device_class": "HUMIDITY",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/humidity",
             "unit_of_measurement": "%",
             "device": {
@@ -97,6 +103,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_lux",
             "object_id": f"{node_id}_lux",
             "unit_of_measurement": "lux",
+            "device_class": "ILLUMINANCE",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/lux",
             "device": {
                 "manufacturer": "Pimironi",
@@ -182,6 +190,8 @@ haClimateDiscoveryTopics = {
             },
             "unique_id": f"{node_id}_gas_reducing_ppm",
             "object_id": f"{node_id}_gas_reducing_ppm",
+            "state_class" : "MEASUREMENT",
+            "device_class": "VOLATILE_ORGANIC_COMPOUNDS_PARTS",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/ppm",
         },
     },
@@ -192,6 +202,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_gas_oxidising_ppm",
             "object_id": f"{node_id}_gas_oxidising_ppm",
             "unit_of_measurement": "ppm",
+            "state_class" : "MEASUREMENT",
+            "device_class": "VOLATILE_ORGANIC_COMPOUNDS_PARTS",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising/ppm",
             "device": {
                 "manufacturer": "Pimironi",
@@ -208,7 +220,63 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_gas_nh3_ppm",
             "unit_of_measurement": "ppm",
             "object_id": f"{node_id}_gas_nh3_ppm",
+            "state_class" : "MEASUREMENT",
+            "device_class": "VOLATILE_ORGANIC_COMPOUNDS_PARTS",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3/ppm",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+        },
+    },
+    "gas/reducing/ug_m3": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/reducing-gas-ug_m3/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} Reducing Gas μg/m3",
+            "unit_of_measurement": "µg/m³",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+            "unique_id": f"{node_id}_gas_reducing_ug_m3",
+            "object_id": f"{node_id}_gas_reducing_ug_m3",
+            "device_class": "CO",
+            "state_class" : "MEASUREMENT",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/ug_m3",
+        },
+    },
+    "gas/oxidising/ug_m3": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/oxidising-gas-ug_m3/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} Oxidising Gas μg/m3",
+            "unique_id": f"{node_id}_gas_oxidising_ug_m3",
+            "object_id": f"{node_id}_gas_oxidising_ug_m3",
+            "unit_of_measurement": "µg/m³",
+            "device_class": "NITROGEN_DIOXIDE",
+            "state_class" : "MEASUREMENT",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/oxidising/ug_m3",
+            "device": {
+                "manufacturer": "Pimironi",
+                "model": "Enviro+",
+                "name": "Office Climate Sensor",
+                "identifiers": ["climate"],
+            },
+        },
+    },
+    "gas/nh3/ug_m3": {
+        "config_topic": f"{homeassistant_mqtt_topic_prefix}/nh3-gas-ug_m3/config",
+        "payload": {
+            "name": f"{node_id.capitalize()} NH3 Gas μg/m3",
+            "unique_id": f"{node_id}_gas_nh3_ug_m3",
+            "unit_of_measurement": "µg/m³",
+            "object_id": f"{node_id}_gas_nh3_ug_m3",
+            "device_class": "VOLATILE_ORGANIC_COMPOUNDS",
+            "state_class" : "MEASUREMENT",
+            "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/nh3/ug_m3",
             "device": {
                 "manufacturer": "Pimironi",
                 "model": "Enviro+",
@@ -224,6 +292,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_pm_one",
             "object_id": f"{node_id}_pm_one",
             "unit_of_measurement": "µg/m3",
+            "device_class": "PM1",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/One",
             "device": {
                 "manufacturer": "Pimironi",
@@ -240,6 +310,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_pm_two_dot_five",
             "object_id": f"{node_id}_pm_two_dot_five",
             "unit_of_measurement": "µg/m3",
+            "device_class": "PM25",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/TwoDotFive",
             "device": {
                 "manufacturer": "Pimironi",
@@ -256,6 +328,8 @@ haClimateDiscoveryTopics = {
             "unique_id": f"{node_id}_pm_ten",
             "object_id": f"{node_id}_pm_ten",
             "unit_of_measurement": "µg/m3",
+            "device_class": "PM10",
+            "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/pm/Ten",
             "device": {
                 "manufacturer": "Pimironi",
@@ -282,6 +356,7 @@ try:
         ltr559_data = ltr559.poll()
         mics6814_data = mics6814.poll()
         mics6814_data_ppm = mics6814.poll_ppm()
+        mics6814_data_ugm3 = mics6814.poll_ugm3()
 
         climate = {
             "temperature": bme280_data["temperature"],
@@ -295,6 +370,9 @@ try:
             "gas/reducing/ppm": mics6814_data_ppm[0],
             "gas/oxidising/ppm": mics6814_data_ppm[1],
             "gas/nh3/ppm": mics6814_data_ppm[2],
+            "gas/reducing/ug_m3": mics6814_data_ugm3[0],
+            "gas/oxidising/ug_m3": mics6814_data_ugm3[1],
+            "gas/nh3/ug_m3": mics6814_data_ugm3[2],
         }
 
         if config["climate"]["sensors"]["pms5003"] == True:
