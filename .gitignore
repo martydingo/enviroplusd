@@ -6,3 +6,7 @@ config.yaml
 .python-version
 poetry.lock
 *.whl
+file.wav
+test.wav
+noise-amps-at-freqs.py
+file.wa
