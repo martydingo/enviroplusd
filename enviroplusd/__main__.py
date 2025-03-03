@@ -244,7 +244,7 @@ haClimateDiscoveryTopics = {
             },
             "unique_id": f"{node_id}_gas_reducing_ug_m3",
             "object_id": f"{node_id}_gas_reducing_ug_m3",
-            "device_class": "CO",
+            "device_class": "CARBON_MONOXIDE",
             "state_class" : "MEASUREMENT",
             "state_topic": f"{enviroplusd_mqtt_topic_prefix}/gas/reducing/ug_m3",
         },
